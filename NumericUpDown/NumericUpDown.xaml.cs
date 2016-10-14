@@ -21,18 +21,14 @@ namespace ControlLib
     /// </summary>
     public partial class NumericUpDown : UserControl
     {
-        public delegate void ValueChangedEventHandler(object sender, ValueChangedEventArgs e);
         public NumericUpDown()
         {
             InitializeComponent();
         }
 
-        // Определение события 
         public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
             "ValueChanged", RoutingStrategy.Direct,
             typeof(ValueChangedEventHandler), typeof(NumericUpDown));
-        
-        // Традиционная оболочка события 
         public event ValueChangedEventHandler ValueChanged
         {
             add
@@ -44,8 +40,6 @@ namespace ControlLib
                 base.RemoveHandler(NumericUpDown.ValueChangedEvent, value);
             }
         }
-
-
 
         public double MaxValue
         {
@@ -181,17 +175,5 @@ namespace ControlLib
                 textBox.CaretIndex = index > 0 ? index - 1 : 0;
             }
         }
-    }
-
-    public class ValueChangedEventArgs : RoutedEventArgs
-    {
-        public ValueChangedEventArgs(RoutedEvent routedEvent, object source, double oldValue, double newValue)
-            : base(routedEvent, source)
-        {
-            OldValue = oldValue;
-            NewValue = newValue;
-        }
-        public double OldValue { get; private set; }
-        public double NewValue { get; private set; }
     }
 }
