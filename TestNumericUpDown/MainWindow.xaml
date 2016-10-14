@@ -7,7 +7,7 @@
         xmlns:ControlLib="clr-namespace:ControlLib;assembly=NumericUpDown" x:Class="TestNumericUpDown.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <ControlLib:NumericUpDown x:Name="numericUpDown" HorizontalAlignment="Center" VerticalAlignment="Center" Increment="4.7" Margin="198,130,189,145"/>
+    <Grid Loaded="Grid_Loaded">
+        <ControlLib:NumericUpDown x:Name="numericUpDown" HorizontalAlignment="Center" VerticalAlignment="Center" Increment="4.7" FontSize="23" MinWidth="137" ValueChanged="numericUpDown_ValueChanged"/>
     </Grid>
 </Window>

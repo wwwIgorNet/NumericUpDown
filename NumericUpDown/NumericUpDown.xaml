@@ -5,22 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ControlLib"
              mc:Ignorable="d" 
-             MinWidth="120" BorderBrush="Gray" BorderThickness="1">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+             MinWidth="120">
+    <Border  BorderBrush="Gray" BorderThickness="1" Margin="4">
         <Grid>
-            <TextBox PreviewKeyDown="textBox_PreviewKeyDown" x:Name="textBox" BorderThickness="0" TextChanged="textBox_TextChanged"  VerticalAlignment="Center"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <TextBox PreviewKeyDown="textBox_PreviewKeyDown" x:Name="textBox" BorderThickness="0" TextChanged="textBox_TextChanged"  VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <RepeatButton Grid.Row="0" x:Name="buttonUp" Content="▲" Padding="0" Margin="0,-1,-1,0" Click="buttonUp_Click" FontSize="5" Width="{Binding ActualHeight, ElementName=buttonUp, Mode=OneWay}"/>
+                <RepeatButton Grid.Row="1" x:Name="buttonDown" Content="▼" Padding="0" Margin="0,0,-1,-1" Click="buttonDown_Click" FontSize="5" Width="{Binding ActualHeight, ElementName=buttonDown, Mode=OneWay}"/>
+            </Grid>
         </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <RepeatButton Grid.Row="0" x:Name="buttonUp" Content="▲" Padding="0" Margin="0,-1,-1,0" Click="buttonUp_Click" FontSize="5" Width="{Binding ActualHeight, ElementName=buttonUp, Mode=OneWay}"/>
-            <RepeatButton Grid.Row="1" x:Name="buttonDown" Content="▼" Padding="0" Margin="0,0,-1,-1" Click="buttonDown_Click" FontSize="5" Width="{Binding ActualHeight, ElementName=buttonDown, Mode=OneWay}"/>
-        </Grid>
-    </Grid>
+    </Border>
 </UserControl>

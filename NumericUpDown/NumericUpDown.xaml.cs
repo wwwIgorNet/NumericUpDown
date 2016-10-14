@@ -21,10 +21,30 @@ namespace ControlLib
     /// </summary>
     public partial class NumericUpDown : UserControl
     {
+        public delegate void ValueChangedEventHandler(object sender, ValueChangedEventArgs e);
         public NumericUpDown()
         {
             InitializeComponent();
         }
+
+        // Определение события 
+        public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
+            "ValueChanged", RoutingStrategy.Direct,
+            typeof(ValueChangedEventHandler), typeof(NumericUpDown));
+        
+        // Традиционная оболочка события 
+        public event ValueChangedEventHandler ValueChanged
+        {
+            add
+            {
+                base.AddHandler(NumericUpDown.ValueChangedEvent, value);
+            }
+            remove
+            {
+                base.RemoveHandler(NumericUpDown.ValueChangedEvent, value);
+            }
+        }
+
 
 
         public double MaxValue
@@ -36,15 +56,17 @@ namespace ControlLib
             DependencyProperty.Register("MaxValue", typeof(double), typeof(NumericUpDown), new FrameworkPropertyMetadata(100D, maxValueChangedCallback, coerceMaxValueCallback));
         private static object coerceMaxValueCallback(DependencyObject d, object value)
         {
-            if ((double)value < ((NumericUpDown)d).MinValue)
-                return ((NumericUpDown)d).MinValue;
+            double minValue = ((NumericUpDown)d).MinValue;
+            if ((double)value < minValue)
+                return minValue;
 
             return value;
         }
         private static void maxValueChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((NumericUpDown)d).CoerceValue(MinValueProperty);
-            ((NumericUpDown)d).CoerceValue(ValueProperty);
+            NumericUpDown numericUpDown = ((NumericUpDown)d);
+            numericUpDown.CoerceValue(MinValueProperty);
+            numericUpDown.CoerceValue(ValueProperty);
         }
 
         public double MinValue
@@ -56,15 +78,17 @@ namespace ControlLib
             DependencyProperty.Register("MinValue", typeof(double), typeof(NumericUpDown), new FrameworkPropertyMetadata(0D, minValueChangedCallback, coerceMinValueCallback));
         private static object coerceMinValueCallback(DependencyObject d, object value)
         {
-            if ((double)value > ((NumericUpDown)d).MaxValue)
-                return ((NumericUpDown)d).MaxValue;
+            double maxValue = ((NumericUpDown)d).MaxValue;
+            if ((double)value > maxValue)
+                return maxValue;
 
             return value;
         }
         private static void minValueChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((NumericUpDown)d).CoerceValue(MaxValueProperty);
-            ((NumericUpDown)d).CoerceValue(ValueProperty);
+            NumericUpDown numericUpDown = ((NumericUpDown)d);
+            numericUpDown.CoerceValue(NumericUpDown.MaxValueProperty);
+            numericUpDown.CoerceValue(NumericUpDown.ValueProperty);
         }
 
         public double Increment
@@ -74,11 +98,10 @@ namespace ControlLib
         }
         public static readonly DependencyProperty IncrementProperty =
             DependencyProperty.Register("Increment", typeof(double), typeof(NumericUpDown), new FrameworkPropertyMetadata(1D, null, coerceIncrementCallback));
-
         private static object coerceIncrementCallback(DependencyObject d, object value)
         {
-            var nud = ((NumericUpDown)d);
-            double i = nud.MaxValue - nud.MinValue;
+            NumericUpDown numericUpDown = ((NumericUpDown)d);
+            double i = numericUpDown.MaxValue - numericUpDown.MinValue;
             if ((double)value > i)
                 return i;
 
@@ -94,7 +117,13 @@ namespace ControlLib
             DependencyProperty.Register("Value", typeof(double), typeof(NumericUpDown), new FrameworkPropertyMetadata(0D, valueChangedCallback, coerceValueCallback), validateValueCallback);
         private static void valueChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((NumericUpDown)d).textBox.Text = e.NewValue.ToString();
+            NumericUpDown numericUpDown = (NumericUpDown)d;
+            ValueChangedEventArgs ea = 
+                new ValueChangedEventArgs(NumericUpDown.ValueChangedEvent, d, (double)e.OldValue, (double)e.NewValue);
+            numericUpDown.RaiseEvent(ea);
+            //if (ea.Handled) numericUpDown.Value = (double)e.OldValue;
+            //else 
+            numericUpDown.textBox.Text = e.NewValue.ToString();
         }
         private static bool validateValueCallback(object value)
         {
@@ -152,5 +181,17 @@ namespace ControlLib
                 textBox.CaretIndex = index > 0 ? index - 1 : 0;
             }
         }
+    }
+
+    public class ValueChangedEventArgs : RoutedEventArgs
+    {
+        public ValueChangedEventArgs(RoutedEvent routedEvent, object source, double oldValue, double newValue)
+            : base(routedEvent, source)
+        {
+            OldValue = oldValue;
+            NewValue = newValue;
+        }
+        public double OldValue { get; private set; }
+        public double NewValue { get; private set; }
     }
 }

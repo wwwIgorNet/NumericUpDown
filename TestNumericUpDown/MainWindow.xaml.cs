@@ -25,7 +25,16 @@ namespace TestNumericUpDown
         public MainWindow()
         {
             InitializeComponent();
+        }
 
+        private void numericUpDown_ValueChanged(object sender, ControlLib.ValueChangedEventArgs e)
+        {
+            Console.WriteLine("OldValue: " + e.OldValue);
+            Console.WriteLine("NewValue: " + e.NewValue);
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
             this.numericUpDown.Value = 100;
             Console.WriteLine(this.numericUpDown.MinValue);
             Console.WriteLine(this.numericUpDown.Value);
@@ -39,13 +48,6 @@ namespace TestNumericUpDown
             Console.WriteLine(this.numericUpDown.Value);
             Console.WriteLine(this.numericUpDown.MaxValue);
             //this.numericUpDown.Increment = 200;
-
-
-        }
-
-        private void NumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }
