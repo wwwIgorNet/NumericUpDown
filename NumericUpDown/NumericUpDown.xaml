@@ -12,7 +12,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid>
-            <TextBox PreviewKeyDown="textBox_PreviewKeyDown" x:Name="textBox" BorderThickness="0" TextChanged="textBox_TextChanged" VerticalAlignment="Center"/>
+            <TextBox PreviewKeyDown="textBox_PreviewKeyDown" x:Name="textBox" BorderThickness="0" TextChanged="textBox_TextChanged"  VerticalAlignment="Center"/>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>

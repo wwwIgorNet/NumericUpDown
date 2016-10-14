@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ControlLib:NumericUpDown x:Name="numericUpDown" HorizontalAlignment="Center" VerticalAlignment="Center" MaxValue="500" MinValue="-500" Increment="4.7" ValueChanged="NumericUpDown_ValueChanged" Margin="198,130,189,145"/>
+        <ControlLib:NumericUpDown x:Name="numericUpDown" HorizontalAlignment="Center" VerticalAlignment="Center" Increment="4.7" Margin="198,130,189,145"/>
     </Grid>
 </Window>

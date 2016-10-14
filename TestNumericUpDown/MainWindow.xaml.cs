@@ -25,11 +25,27 @@ namespace TestNumericUpDown
         public MainWindow()
         {
             InitializeComponent();
+
+            this.numericUpDown.Value = 100;
+            Console.WriteLine(this.numericUpDown.MinValue);
+            Console.WriteLine(this.numericUpDown.Value);
+            Console.WriteLine(this.numericUpDown.MaxValue);
+            this.numericUpDown.MaxValue = -2;
+            Console.WriteLine(this.numericUpDown.MinValue);
+            Console.WriteLine(this.numericUpDown.Value);
+            Console.WriteLine(this.numericUpDown.MaxValue);
+            this.numericUpDown.MinValue = -100;
+            Console.WriteLine(this.numericUpDown.MinValue);
+            Console.WriteLine(this.numericUpDown.Value);
+            Console.WriteLine(this.numericUpDown.MaxValue);
+            //this.numericUpDown.Increment = 200;
+
+
         }
 
         private void NumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(this.numericUpDown.Value);
+            
         }
     }
 }
