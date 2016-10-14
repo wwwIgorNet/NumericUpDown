@@ -1,0 +1,13 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestNumericUpDown"
+        xmlns:ControlLib="clr-namespace:ControlLib;assembly=NumericUpDown" x:Class="TestNumericUpDown.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <ControlLib:NumericUpDown x:Name="numericUpDown" HorizontalAlignment="Center" VerticalAlignment="Center" MaxValue="500" MinValue="-500" Increment="4.7" ValueChanged="NumericUpDown_ValueChanged" Margin="198,130,189,145"/>
+    </Grid>
+</Window>
