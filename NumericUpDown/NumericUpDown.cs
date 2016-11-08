@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -16,14 +17,42 @@ using System.Windows.Shapes;
 
 namespace ControlLib
 {
-    /// <summary>
-    /// Interaction logic for UserControl1.xaml
-    /// </summary>
-    public partial class NumericUpDown : UserControl
+
+    [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
+    [TemplatePart(Name = "PART_ButtonUp", Type = typeof(ButtonBase))]
+    [TemplatePart(Name = "PART_ButtonDown", Type = typeof(ButtonBase))]
+    public class NumericUpDown : Control
     {
-        public NumericUpDown()
+
+        private TextBox PART_TextBox = new TextBox();
+
+        public override void OnApplyTemplate()
         {
-            InitializeComponent();
+            base.OnApplyTemplate();
+
+            TextBox textBox = GetTemplateChild("PART_TextBox") as TextBox;
+            if (textBox != null)
+            {
+                PART_TextBox = textBox;
+                PART_TextBox.PreviewKeyDown += textBox_PreviewKeyDown;
+                PART_TextBox.TextChanged += textBox_TextChanged;
+                PART_TextBox.Text = Value.ToString();
+            }
+            ButtonBase PART_ButtonUp = GetTemplateChild("PART_ButtonUp") as ButtonBase;
+            if(PART_ButtonUp != null)
+            {
+                PART_ButtonUp.Click += buttonUp_Click;
+            }
+            ButtonBase PART_ButtonDown = GetTemplateChild("PART_ButtonDown") as ButtonBase;
+            if (PART_ButtonDown != null)
+            {
+                PART_ButtonDown.Click += buttonDown_Click;
+            }
+        }
+
+        static NumericUpDown()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
         }
 
         public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
@@ -117,7 +146,7 @@ namespace ControlLib
             numericUpDown.RaiseEvent(ea);
             //if (ea.Handled) numericUpDown.Value = (double)e.OldValue;
             //else 
-            numericUpDown.textBox.Text = e.NewValue.ToString();
+            numericUpDown.PART_TextBox.Text = e.NewValue.ToString();
         }
         private static bool validateValueCallback(object value)
         {
@@ -159,20 +188,20 @@ namespace ControlLib
         }
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int index = textBox.CaretIndex;
+            int index = PART_TextBox.CaretIndex;
             double result;
-            if (!double.TryParse(textBox.Text, out result))
+            if (!double.TryParse(PART_TextBox.Text, out result))
             {
                 var changes = e.Changes.FirstOrDefault();
-                textBox.Text = textBox.Text.Remove(changes.Offset, changes.AddedLength);
-                textBox.CaretIndex = index > 0 ? index - changes.AddedLength : 0;
+                PART_TextBox.Text = PART_TextBox.Text.Remove(changes.Offset, changes.AddedLength);
+                PART_TextBox.CaretIndex = index > 0 ? index - changes.AddedLength : 0;
             }
             else if (result < MaxValue && result > MinValue)
                 Value = result;
             else
             {
-                textBox.Text = Value.ToString();
-                textBox.CaretIndex = index > 0 ? index - 1 : 0;
+                PART_TextBox.Text = Value.ToString();
+                PART_TextBox.CaretIndex = index > 0 ? index - 1 : 0;
             }
         }
     }

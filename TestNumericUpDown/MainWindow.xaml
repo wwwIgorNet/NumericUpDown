@@ -4,10 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestNumericUpDown"
-        xmlns:ControlLib="clr-namespace:ControlLib;assembly=NumericUpDown" x:Class="TestNumericUpDown.MainWindow"
+        xmlns:ControlLib="clr-namespace:ControlLib;assembly=NumericUpDown"
+        x:Class="TestNumericUpDown.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid Loaded="Grid_Loaded">
-        <ControlLib:NumericUpDown x:Name="numericUpDown" HorizontalAlignment="Center" VerticalAlignment="Center" Increment="4.7" FontSize="24" ValueChanged="numericUpDown_ValueChanged" Width="177"/>
-    </Grid>
+        Loaded="Window_Loaded"
+        Title="MainWindow" Height="450" Width="525">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TestNumericUpDown;component/DictionaryThemes.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel>
+        <ControlLib:NumericUpDown x:Name="numericUpDown" HorizontalAlignment="Center" MinValue="-100" MaxValue="-2" VerticalAlignment="Center" Increment="4.7" FontSize="24" ValueChanged="numericUpDown_ValueChanged" Width="200"/>
+        <ControlLib:NumericUpDown Style="{StaticResource ResourceKey=styleNumericUpDown}" Increment="2" Margin="15" FontSize="20" Width="200"/>
+        <ControlLib:NumericUpDown Increment="2" BorderBrush="Blue" BorderThickness="3" Width="250"/>
+        <ControlLib:NumericUpDown Style="{StaticResource styleNumericUpDown2}" Increment="2" HorizontalAlignment="Center" BorderThickness="2" Margin="15"/>
+    </StackPanel>
 </Window>

@@ -33,20 +33,20 @@ namespace TestNumericUpDown
             Console.WriteLine("NewValue: " + e.NewValue);
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.numericUpDown.Value = 100;
-            Console.WriteLine(this.numericUpDown.MinValue);
-            Console.WriteLine(this.numericUpDown.Value);
-            Console.WriteLine(this.numericUpDown.MaxValue);
-            this.numericUpDown.MaxValue = -2;
-            Console.WriteLine(this.numericUpDown.MinValue);
-            Console.WriteLine(this.numericUpDown.Value);
-            Console.WriteLine(this.numericUpDown.MaxValue);
-            this.numericUpDown.MinValue = -100;
-            Console.WriteLine(this.numericUpDown.MinValue);
-            Console.WriteLine(this.numericUpDown.Value);
-            Console.WriteLine(this.numericUpDown.MaxValue);
+            //this.numericUpDown.Value = 100;
+            //Console.WriteLine(this.numericUpDown.MinValue);
+            //Console.WriteLine(this.numericUpDown.Value);
+            //Console.WriteLine(this.numericUpDown.MaxValue);
+            //this.numericUpDown.MaxValue = -2;
+            //Console.WriteLine(this.numericUpDown.MinValue);
+            //Console.WriteLine(this.numericUpDown.Value);
+            //Console.WriteLine(this.numericUpDown.MaxValue);
+            //this.numericUpDown.MinValue = -100;
+            //Console.WriteLine(this.numericUpDown.MinValue);
+            //Console.WriteLine(this.numericUpDown.Value);
+            //Console.WriteLine(this.numericUpDown.MaxValue);
             //this.numericUpDown.Increment = 200;
         }
     }

@@ -45,18 +45,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FontSizeConverter.cs" />
+    <Compile Include="NumericUpDown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NumericUpDown.xaml.cs">
-      <DependentUpon>NumericUpDown.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ValueChangedEventHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="NumericUpDown.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="themes\generic.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\NumericUpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
