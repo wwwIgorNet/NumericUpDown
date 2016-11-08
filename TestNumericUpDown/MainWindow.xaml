@@ -14,12 +14,16 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/TestNumericUpDown;component/DictionaryThemes.xaml" />
             </ResourceDictionary.MergedDictionaries>
+        <Style TargetType="{x:Type ControlLib:NumericUpDown}">
+            <Setter Property="Margin" Value="15"/>
+        </Style>
         </ResourceDictionary>
     </Window.Resources>
     <StackPanel>
         <ControlLib:NumericUpDown x:Name="numericUpDown" HorizontalAlignment="Center" MinValue="-100" MaxValue="-2" VerticalAlignment="Center" Increment="4.7" FontSize="24" ValueChanged="numericUpDown_ValueChanged" Width="200"/>
-        <ControlLib:NumericUpDown Style="{StaticResource ResourceKey=styleNumericUpDown}" Increment="2" Margin="15" FontSize="20" Width="200"/>
+        <ControlLib:NumericUpDown Style="{StaticResource ResourceKey=styleNumericUpDown}" Increment="2" FontSize="20" Width="200"/>
         <ControlLib:NumericUpDown Increment="2" BorderBrush="Blue" BorderThickness="3" Width="250"/>
-        <ControlLib:NumericUpDown Style="{StaticResource styleNumericUpDown2}" Increment="2" HorizontalAlignment="Center" BorderThickness="2" Margin="15"/>
+        <ControlLib:NumericUpDown Style="{StaticResource styleNumericUpDown2}" Increment="2" HorizontalAlignment="Center" BorderThickness="2"/>
+        <ControlLib:NumericUpDown HorizontalAlignment="Center"/>
     </StackPanel>
 </Window>

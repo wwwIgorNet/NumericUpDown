@@ -13,11 +13,14 @@ namespace ControlLib
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             double v = (double)value;
-            v = v - 7;
-            if (v > 0)
-                return v;
-            else
-                return 0D;
+            return v * 0.6;
+
+            //double v = (double)value;
+            //v = v - 7;
+            //if (v > 0)
+            //    return v;
+            //else
+            //    return v;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
